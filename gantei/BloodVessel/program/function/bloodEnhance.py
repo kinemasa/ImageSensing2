@@ -11,15 +11,17 @@ import rotate_image as ri
 def morph_reconstruct_filter(grChannel,vesselSize):
 
     clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))##特定化ヒストグラム平坦化
+    
     gr = clahe.apply(grChannel)
     gr = ~gr##ビット反転
+    plt.imsave("grChannel.png",gr)
     kernel = np.zeros((vesselSize,vesselSize), dtype = np.uint8)
     kernel[9,:] = np.ones((1,vesselSize), dtype = np.uint8)
     morph_image = np.zeros_like(grChannel)
+    plt.imsave("morph.png",morph_image)
     for angle in range(15, 180, 180 // 12):
         image = cv2.morphologyEx(gr, cv2.MORPH_OPEN, ri.rotate_image(kernel, angle), iterations = 1)
         morph_image = cv2.add(morph_image, cv2.subtract(gr, image))
-        
     return morph_image
 
 
@@ -35,7 +37,9 @@ def convolve2D(image,kernel):
         for x in np.arange(pad, iW + pad):
             roi = img[y - pad:y + pad + 1, x - pad:x + pad + 1]
             output[y - pad,x - pad] = (roi * kernel).sum()
+    
     w = image - output
+
     output = rescale_intensity(output, in_range = (0,255))
     output = (output * 255).astype("uint8")
     return output, w
@@ -57,26 +61,30 @@ def isotropic_undec_wavelet_filter2D(image):
         kernel[0][int(ks/2)] = C2
         kernel[0][int(kernel_sizes[idx]/4+ks)] = C2
         kernel[0][ks] = C3
+        
+      
         c_nxt, w = convolve2D(c_prv, kernel.T * kernel)
         c_prv = c_nxt
         W.append(w)
         A = kernel.T * kernel
 
 
-    plt.imsave("wavelet.png",filtered_result)
+    
     #     Computing the result Iiuw
     Iiuw = W[1] + W[2]
+    #Iiuw= W[0]
+    plt.imsave("wavelet.png",Iiuw)
     return Iiuw, c_nxt, W
 
 
 if __name__ =="__main__":
-    img ="gantei/BloodVessel/src/gantei100.tiff"
+    img ="gantei/BloodVessel/src/ganteiBlood.png"
     grChannel= egc.extract_green_channel(img)
-    rotategrChannel = ri.rotate_image(grChannel,10)
+    
     morphChannel= morph_reconstruct_filter(grChannel,10)
     filtered_result, _, _ = isotropic_undec_wavelet_filter2D(grChannel)
-    cv2.imshow("morphImg",morphChannel)
-    cv2.imshow("wavelet",filtered_result)
+    
+    # cv2.imshow("wavelet",filtered_result)
     plt.imsave("wavelet.png",filtered_result)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
