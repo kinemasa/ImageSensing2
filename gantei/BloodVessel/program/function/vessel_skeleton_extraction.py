@@ -19,6 +19,7 @@ def vessel_skeleton_extraction(image):
     bw = Iiuw < thres
     bw = bw.astype(np.uint8) * 255
     fil_bw = cv2.bitwise_and(bw,bw, mask = mask)
+    plt.imsave("sub.png",Iiuw)
     m = np.ones_like(mask) * 255
     m1 = np.ones_like(mask) * 255
     contours, _ = cv2.findContours(fil_bw, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
