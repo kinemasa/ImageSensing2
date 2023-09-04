@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-
+import matplotlib.pyplot as plt
 
 import binary as bi
 
@@ -26,13 +26,14 @@ def Morphologydilate(img,threshold):
 
 
 if __name__ == "__main__":
-    img = cv2.imread("opencv\src\ganteiBlood.png",0)
+    img = cv2.imread("opencv\src\wavelet.png",0)
     bi.binary_threshold(img)
     img_erode = MorphologyErode(img)
     img_dilate=Morphologydilate(img,84)
 
     cv2.imshow("erode",img_erode)
     cv2.imshow("dilate",img_dilate)
-
+    cv2.imwrite("erode.png",img_erode)
+    cv2.imwrite("dilate.png",img_dilate)
     cv2.waitKey(0)
     cv2.destroyAllWindows()

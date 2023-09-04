@@ -37,7 +37,7 @@ img_lapGau = cv2.convertScaleAbs(Laplacian_Gaussian_filter)
 img_canny = cv2.Canny(img,10,110)
 
 if __name__ == "__main__":
-    img = cv2.imread("opencv\src\gantei100.tiff")
+    img = cv2.imread("opencv\src\wavelet.png")
     Laplacian_Gaussian_filter = cv2.Laplacian(img_gaussian,cv2.CV_32F)
     img_lapGau = cv2.convertScaleAbs(Laplacian_Gaussian_filter)
     cv2.imshow("img",img_lapGau)

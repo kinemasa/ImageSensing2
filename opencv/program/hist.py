@@ -28,8 +28,8 @@ def hist_equalization(img):
 
 
 if __name__ == "__main__":
-    img = cv2.imread("opencv\src\ganteiBlood.png")
-    cv2.imwrite("opencv\\result\\img.jpeg",img)
+    img = cv2.imread("opencv\src\wavelet.png",0)
+    gray_hist(img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 

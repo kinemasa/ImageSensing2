@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 
-img = cv2.imread("opencv\src\ganteiBlood.png",0)
+img = cv2.imread("opencv\src\wavelet.png",0)
 
 
 
@@ -43,9 +43,10 @@ def binary_otsu(img):
 
 
 if __name__ == "__main__":
-    img = cv2.imread("opencv\src\ganteiBlood.png",0)
-    binary_threshold(img)
-    #img_binary = binary_otsu(img)
+    img = cv2.imread("opencv\src\wavelet.png",0)
+    othu = binary_threshold(img)
+    img_binary = binary_otsu(img)
     cv2.imshow("img_binary",img)
+    cv2.imwrite("img_otsh.png",othu)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
