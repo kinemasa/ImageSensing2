@@ -4,7 +4,10 @@ import math
 import numpy as np
 from skimage.exposure import rescale_intensity
 
-import extract_green_channel  as egc
+# from function import extract_green_channel as egc
+# from function import rotate_image as ri
+
+import extract_green_channel as egc
 import rotate_image as ri
 
 ##VesselSize : the approximate diameter of the biggest vessel in the image

@@ -3,8 +3,10 @@ import matplotlib.pyplot as plt
 import math
 import numpy as np
 
-import bloodEnhance  as be
+# from function import bloodEnhance  as be
 
+# from function import extract_green_channel as egc
+import bloodEnhance  as be
 import extract_green_channel as egc
 
 

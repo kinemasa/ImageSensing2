@@ -2,9 +2,14 @@ import cv2
 import matplotlib.pyplot as plt
 
 import numpy as np
+# from function import extract_green_channel as egc
+# from function import bloodEnhance  as be
+# from function import imageSegmentation as ims
+
 import extract_green_channel as egc
 import bloodEnhance  as be
 import imageSegmentation as ims
+
 
 
 def vessel_skeleton_extraction(image):
@@ -39,7 +44,7 @@ def vessel_skeleton_extraction(image):
 
 
 if __name__ =="__main__":
-    img ="gantei/BloodVessel/src/ganteiBlood.png"
+    img ="gantei/BloodVessel/src/gantei101.tiff"
     grChannel= egc.extract_green_channel(img)
     vessel =vessel_skeleton_extraction(grChannel)
 

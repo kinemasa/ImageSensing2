@@ -20,7 +20,7 @@ import function.trimapFormation as tf
 
 
 
-img = 'gantei/BloodVessel/src/gantei100.tiff'
+img = 'gantei\BloodVessel\src\gantei101.tiff'
 
 
 grChannel = egc.extract_green_channel(img)

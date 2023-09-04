@@ -2,9 +2,9 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-import extract_green_channel as egc
-import imageSegmentation as ims
-import vessel_skeleton_extraction as vse
+from function import extract_green_channel as egc
+from function import imageSegmentation as ims
+from function import vessel_skeleton_extraction as vse
 
 def trimap_formation(image):
     B, U, V2 = ims.image_segmentation(image)
