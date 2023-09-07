@@ -44,7 +44,8 @@ def negaposi(img):
 # 2値化
 def binary(img):
     x = np.arange(256)
-    y = np.where(x <= 80, 0, 255)
+    y = np.where(x <= 95 , 0, 255)
+    
 
     dst = cv2.LUT(img, y)
     plot_grayscale_conversion(img, dst)
@@ -72,7 +73,6 @@ def enhanceContrust(img):
 
 if __name__ == "__main__":
     img = cv2.imread("opencv\src\wavelet.png",0)
-
-    postarization(img,20)
+    binary(img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()

@@ -43,10 +43,9 @@ def binary_otsu(img):
 
 
 if __name__ == "__main__":
-    img = cv2.imread("opencv\src\wavelet.png",0)
-    othu = binary_threshold(img)
-    img_binary = binary_otsu(img)
-    cv2.imshow("img_binary",img)
-    cv2.imwrite("img_otsh.png",othu)
+    img = cv2.imread("opencv\src\wavelet5.png",0)
+    img_binary = binary_threshold(img)
+    cv2.imshow("img_binary",img_binary)
+    cv2.imwrite("binary.png",img_binary)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
