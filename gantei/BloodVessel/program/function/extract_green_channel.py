@@ -9,7 +9,7 @@ def extract_green_channel(file):
 
 
 if __name__ =="__main__":
-    img ="gantei/BloodVessel/src/gantei100.tiff"
+    img ="/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei/BloodVessel/src/gantei.tiff"
     greenImg = extract_green_channel(img)
     cv2.imshow("greenImg",greenImg)
     cv2.waitKey(0)

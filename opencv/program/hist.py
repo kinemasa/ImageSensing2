@@ -28,9 +28,7 @@ def hist_equalization(img):
 
 
 if __name__ == "__main__":
-    img = cv2.imread("opencv\src\ganteiBlood.png")
-    cv2.imwrite("opencv\\result\\img.jpeg",img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    img = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei/BloodVessel/src/gantei100.tiff")
+    gray_hist(img)
 
 

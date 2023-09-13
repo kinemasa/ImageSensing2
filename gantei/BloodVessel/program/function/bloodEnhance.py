@@ -81,13 +81,12 @@ def isotropic_undec_wavelet_filter2D(image):
 
 
 if __name__ =="__main__":
-    img ="gantei/BloodVessel/src/ganteiBlood.png"
+    img ="/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei/BloodVessel/src/gantei200.tiff"
     grChannel= egc.extract_green_channel(img)
     
     morphChannel= morph_reconstruct_filter(grChannel,10)
     filtered_result, _, _ = isotropic_undec_wavelet_filter2D(grChannel)
     
-    # cv2.imshow("wavelet",filtered_result)
+    cv2.imshow("wavelet",morphChannel)
     plt.imsave("wavelet.png",filtered_result)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+   

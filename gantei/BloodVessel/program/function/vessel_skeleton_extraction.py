@@ -15,7 +15,7 @@ import imageSegmentation as ims
 def vessel_skeleton_extraction(image):
     Iiuw, _, _  = be.isotropic_undec_wavelet_filter2D(image)
     per_px_inc = 0.3
-    epsilon = 0.03
+    epsilon = 0.05
     mask = cv2.imread('C:\\Users\\kine0\\labo\\ImageSensing2\\gantei\\BloodVessel\\result\\wavelet.png', 0)
     t = np.sort(np.ravel(Iiuw))
     thres = t[int(per_px_inc * len(t)) - 1] + epsilon
@@ -44,7 +44,7 @@ def vessel_skeleton_extraction(image):
 
 
 if __name__ =="__main__":
-    img ="gantei/BloodVessel/src/gantei101.tiff"
+    img ="/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei/BloodVessel/src/gantei200.tiff"
     grChannel= egc.extract_green_channel(img)
     vessel =vessel_skeleton_extraction(grChannel)
 
@@ -57,5 +57,3 @@ if __name__ =="__main__":
     # 結果を出力
     cv2.imwrite("otsu.png", th)
     plt.imsave("vessel.png",vessel)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
