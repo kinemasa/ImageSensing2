@@ -1,8 +1,12 @@
+"""
+画像のヒストグラムを表示する
+
+input :画像
+output :画像のヒストグラム
+"""
+
 import cv2
 import matplotlib.pyplot as plt
-
-
-
 
 def color_hist(img):
     color_list = ["blue","green","red"]

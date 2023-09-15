@@ -1,12 +1,14 @@
+"""
+画像の収縮と膨張を行う
+入力：画像
+出力：変換結果画像
+"""
+
 import cv2
 import numpy as np
-
-
 import binary as bi
 
-"""
-入力した画像から閾値を調べ　モルフォルジー変換　膨張と職掌を行う
-"""
+
 def MorphologyErode(img):
     threshold =input("input number :")
     threshold = int(threshold)

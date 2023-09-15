@@ -1,5 +1,10 @@
-import math
+"""
+JISの定義に基づいて放射照度を求める
 
+input :眼底画像 
+output :テンプレート画像
+"""
+import math
 coneHeight = 10
 coneradius = 0.5
 radientEnergy = 2.5

@@ -1,12 +1,13 @@
+"""
+画像の二値化をトラックバーと大津のアルゴリズムを用いて行う
+
+input :眼底画像群フォルダ
+output :テンプレートマッチングを行ってトリミングを行った画像群
+"""
+
+
 import cv2
 import matplotlib.pyplot as plt
-
-
-
-img = cv2.imread("opencv\src\ganteiBlood.png",0)
-
-
-
 
 window_title="trackbar"
 

@@ -1,3 +1,9 @@
+"""
+移動や回転などのアフィン変換を行う
+
+input :対象画像
+output :変換画像
+"""
 import cv2
 import numpy as np
 
