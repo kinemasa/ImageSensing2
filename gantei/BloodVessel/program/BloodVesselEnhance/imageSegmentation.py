@@ -1,11 +1,13 @@
+"""
+血管強調フィルタと血管の領域特徴量から領域分割を行う
+input :眼底画像
+output : 前傾　背景　未知領域の三種類の画像
+"""
+
 import cv2
 import matplotlib.pyplot as plt
 import math
 import numpy as np
-
-# from function import bloodEnhance  as be
-
-# from function import extract_green_channel as egc
 import bloodEnhance  as be
 import extract_green_channel as egc
 

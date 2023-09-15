@@ -1,12 +1,18 @@
+"""
+血管強調を行う
+
+morph血管強調フィルタ
+等方性ウェーブレットフィルタ
+
+input :眼底画像
+output : 血管強調画像
+"""
+
 import cv2
 import matplotlib.pyplot as plt
 import math
 import numpy as np
 from skimage.exposure import rescale_intensity
-
-# from function import extract_green_channel as egc
-# from function import rotate_image as ri
-
 import extract_green_channel as egc
 import rotate_image as ri
 
@@ -81,12 +87,15 @@ def isotropic_undec_wavelet_filter2D(image):
 
 
 if __name__ =="__main__":
+    
+    ##Mac
     img ="/Users/masayakinefuchi/labo/imagesensing2/triming.jpg"
+    
     grChannel= egc.extract_green_channel(img)
     
     morphChannel= morph_reconstruct_filter(grChannel,10)
     filtered_result, _, _ = isotropic_undec_wavelet_filter2D(grChannel)
     
-    cv2.imshow("wavelet",morphChannel)
+    plt.imsave("morph.png",morphChannel)
     plt.imsave("wavelet.png",filtered_result)
    

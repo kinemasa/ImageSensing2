@@ -1,4 +1,9 @@
-# -*- coding: utf-8 -*-
+"""
+テンプレートマッチングに用いるテンプレート画像を作成する
+
+input :眼底画像 
+output :テンプレート画像
+"""
 import cv2
 import numpy as np
 import glob

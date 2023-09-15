@@ -1,3 +1,11 @@
+"""
+画像の回転を行う関数
+
+input :眼底画像 角度
+output : 回転画像
+"""
+
+
 import cv2
 import matplotlib.pyplot as plt
 import math

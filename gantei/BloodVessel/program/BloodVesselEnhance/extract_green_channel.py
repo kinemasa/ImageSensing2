@@ -1,3 +1,9 @@
+"""
+画像のG成分のみを抜き出す
+
+input :眼底画像
+output : G成分画像
+"""
 import cv2
 import numpy as np
 

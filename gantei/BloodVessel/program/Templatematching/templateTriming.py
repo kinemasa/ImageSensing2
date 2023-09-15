@@ -1,13 +1,14 @@
 """
-テンプレートマッチングを行った後対象領域をトリミングする
+テンプレートマッチングを用いて動画から対象の画像群を切り出す
+
+input :眼底画像群フォルダ
+output :テンプレートマッチングを行ってトリミングを行った画像群
 """
 
 import cv2
 import numpy as np
 import glob
 import sys
-import csv
-import re
 import os
 
 

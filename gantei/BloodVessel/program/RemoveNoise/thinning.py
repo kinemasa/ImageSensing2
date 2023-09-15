@@ -1,3 +1,8 @@
+"""
+領域の細線化を行う
+input :眼底画像 
+output :細線化画像
+"""
 import cv2
 import numpy as np
 
@@ -14,10 +19,8 @@ def display_result_image(cap, color_image, skeleton):
     cv2.waitKey(0)
 
 # 細線化
-def main():
-    # 入力画像の取得
-    gray = cv2.imread('/Users/masayakinefuchi/labo/imagesensing2/answer1.png',0)
-
+def thinning(gray):
+    
     _, gray = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY +cv2.THRESH_OTSU)
 
     # 二値画像反転
@@ -32,4 +35,8 @@ def main():
     display_result_image('GUOHALL', gray, skeleton2)
 
 if __name__ == '__main__':
-    main()
+    
+    # 入力画像の取得
+    img = cv2.imread('/Users/masayakinefuchi/labo/imagesensing2/answer1.png',0)
+    thinning(img)
+    

@@ -1,10 +1,15 @@
+"""
+血管強調フィルタを二つ用いた眼底血管抽出画像を出力
+input :眼底画像
+output : トリマップ作成
+"""
+
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-
-from function import extract_green_channel as egc
-from function import imageSegmentation as ims
-from function import vessel_skeleton_extraction as vse
+import extract_green_channel as egc
+import imageSegmentation as ims
+import vessel_skeleton_extraction as vse
 
 def trimap_formation(image):
     B, U, V2 = ims.image_segmentation(image)

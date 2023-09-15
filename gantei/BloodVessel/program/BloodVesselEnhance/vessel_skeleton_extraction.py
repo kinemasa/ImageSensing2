@@ -1,11 +1,12 @@
+"""
+画像特徴量を用いた血管推定
+input :眼底画像
+output : 血管強調画像
+"""
+
 import cv2
 import matplotlib.pyplot as plt
-
 import numpy as np
-# from function import extract_green_channel as egc
-# from function import bloodEnhance  as be
-# from function import imageSegmentation as ims
-
 import extract_green_channel as egc
 import bloodEnhance  as be
 import imageSegmentation as ims
