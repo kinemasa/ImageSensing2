@@ -14,8 +14,8 @@ import os
   
 INPUT_DIR = '/Volumes/Extreme SSD/gantei1009/'
 files = glob.glob(INPUT_DIR+'*')
-OUTPUT_DIR= '/Volumes/Extreme SSD/gantei1009/templateTriming/'
-temp = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei/BloodVessel/program/gantei.tiff")
+OUTPUT_DIR= '/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei/BloodVessel/result/triming/'
+temp = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/template.png")
 num = len(files)
 
 ##import picture

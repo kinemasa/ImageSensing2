@@ -81,7 +81,7 @@ def isotropic_undec_wavelet_filter2D(image):
 
 
 if __name__ =="__main__":
-    img ="/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei/BloodVessel/src/gantei200.tiff"
+    img ="/Users/masayakinefuchi/labo/imagesensing2/triming.jpg"
     grChannel= egc.extract_green_channel(img)
     
     morphChannel= morph_reconstruct_filter(grChannel,10)

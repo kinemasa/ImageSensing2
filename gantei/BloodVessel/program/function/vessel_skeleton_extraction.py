@@ -44,7 +44,7 @@ def vessel_skeleton_extraction(image):
 
 
 if __name__ =="__main__":
-    img ="/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei/BloodVessel/src/gantei200.tiff"
+    img ="/Users/masayakinefuchi/labo/imagesensing2/triming.jpg"
     grChannel= egc.extract_green_channel(img)
     vessel =vessel_skeleton_extraction(grChannel)
 

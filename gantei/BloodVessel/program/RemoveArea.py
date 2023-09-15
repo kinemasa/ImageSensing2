@@ -20,7 +20,7 @@ def main():
     # ゴミ除去,面積50px以下を排除
     new_contours=[]
     FILL_COLOR=(0,0,0)
-    AREA_MAX=700
+    AREA_MAX=300
     i=0
 
     

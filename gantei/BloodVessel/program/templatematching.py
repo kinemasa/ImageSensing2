@@ -7,7 +7,7 @@ import cv2
 if __name__ =="__main__":
   #input image
    img = cv2.imread('/Volumes/Extreme SSD/gantei1009/2023-08-17 20-04-44.800_gantei1009_2_1.tiff')
-   temp = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei/BloodVessel/src/gantei.tiff")
+   temp = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/template.png")
    
    
    height,width = temp.shape[:2]

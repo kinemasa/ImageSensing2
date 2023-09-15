@@ -6,7 +6,7 @@ import sys
 import csv
 import re
 import os
-import _funcSkinSeparation2 as ss
+
 
 def getVideoROI(img):
     roi = cv2.selectROI(img)
@@ -16,7 +16,7 @@ def getVideoROI(img):
 dir_name = '/Volumes/Extreme SSD/gantei1009/'
 
 files = glob.glob(dir_name+'*')
-OUTPUT_DIR='/Users/masayakinefuchi/imageSensing/RGB_pulse/_skinColorSeparation/result/'
+
 
 img_name = files[0]
 img = cv2.imread(img_name)
@@ -31,7 +31,13 @@ height=50
 #Crop Image
 selectRoi_crop = img[int(roi[1]):int(roi[1]+roi[3]),int(roi[0]):int(roi[0]+roi[2])]
 
-fixedRoi_crop = img[int(roi[1]):int(roi[1]+height),int(roi[0]):int(roi[0]+width)]
+##ROI
+cv2.rectangle(img,(roi[0],roi[1]),(roi[0]+roi[2],roi[1]+roi[3]),(0,0,200),3)
 
-cv2.imwrite("selectedRoi.png", selectRoi_crop)
-cv2.imwrite("fixedRoi.png", fixedRoi_crop)
+
+cv2.imwrite("template.png", selectRoi_crop)
+
+cv2.imwrite("checkROI.png", img)
+
+
+    
