@@ -55,6 +55,7 @@ def convolve2D(image,kernel):
 
 
 def isotropic_undec_wavelet_filter2D(image):
+   
     # Bi-spline cubic function is given by h
     c_prv = image
     C1 = 1. / 16.
@@ -89,7 +90,7 @@ def isotropic_undec_wavelet_filter2D(image):
 if __name__ =="__main__":
     
     ##Mac
-    img ="/Users/masayakinefuchi/labo/imagesensing2/triming.jpg"
+    img ="/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/clahe2.png"
     
     grChannel= egc.extract_green_channel(img)
     

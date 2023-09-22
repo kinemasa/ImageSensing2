@@ -18,9 +18,11 @@ def natural_keys(text):
 
 
 # 入力動画
-INPUT_VIDEO = 'd:\\gantei1009\\**.tiff'
+# INPUT_VIDEO = 'd:\\gantei1009\\**.tiff'
+INPUT_VIDEO = '/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei/BloodVessel/result/triming/**.jpg'
+
 # 出力動画 - ファイル名
-OUTPUT_VIDEO = 'C:\\Users\\kine0\\labo\\ImageSensing2\\makemovie\\movie\\output7.mp4'
+OUTPUT_VIDEO = 'output7.mp4'
 # 出力動画 - フレームレート
 OUTPUT_FPS = 30
 

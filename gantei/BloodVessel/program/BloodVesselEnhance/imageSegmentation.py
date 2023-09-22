@@ -23,7 +23,7 @@ def contourProps(cnt):
 
 def image_segmentation(image):
     Imr = be.morph_reconstruct_filter(image,10)
-    # Imr = cv2.morphologyEx(Imr, cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(5,5)), iterations = 1)
+    # Imr = cv2.morphologyEx(Imr, cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3)), iterations = 1)
     Imr = Imr / max(np.ravel(Imr))
     B = (Imr < 0.42)
     U = (Imr > 0.42) * (Imr < 0.75)
@@ -42,7 +42,7 @@ def image_segmentation(image):
 
 
 if __name__ =="__main__":
-    img ="/Users/masayakinefuchi/labo/imagesensing2/triming.jpg"
+    img ="/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/clahe2.png"
     grChannel= egc.extract_green_channel(img)
     morphChannel= be.morph_reconstruct_filter(grChannel,10)
     filtered_result, _, _ = be.isotropic_undec_wavelet_filter2D(grChannel)

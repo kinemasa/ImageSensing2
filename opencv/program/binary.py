@@ -44,7 +44,7 @@ def binary_otsu(img):
 
 
 if __name__ == "__main__":
-    img = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/vessel.png",0)
+    img = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/median2.png",0)
     binary_threshold(img)
     #img_binary = binary_otsu(img)
     cv2.imshow("img_binary",img)

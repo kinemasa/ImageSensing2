@@ -7,7 +7,7 @@ import cv2
 """
 フィルタによる演算
 """
-img = cv2.imread("opencv\src\ganteiBlood.png",0)
+img = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/template.png",0)
 ##平均化フィルタ
 img_blur =cv2.blur(img,(3,3))
 ##ガウシアンフィルタ
@@ -41,9 +41,8 @@ img_lapGau = cv2.convertScaleAbs(Laplacian_Gaussian_filter)
 img_canny = cv2.Canny(img,10,110)
 
 if __name__ == "__main__":
-    img = cv2.imread("opencv\src\gantei100.tiff")
-    Laplacian_Gaussian_filter = cv2.Laplacian(img_gaussian,cv2.CV_32F)
-    img_lapGau = cv2.convertScaleAbs(Laplacian_Gaussian_filter)
-    cv2.imshow("img",img_lapGau)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    img = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/clahe2.png")
+    ##メディアんフィルタ
+    img_blur =cv2.blur(img,(3,3))
+    cv2.imwrite("median2.png",img_blur)
+    
