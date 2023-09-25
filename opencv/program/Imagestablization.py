@@ -2,9 +2,9 @@ import cv2
 
 # 画像を読み込む
 # 画像1
-img1 = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei1.tiff")
+img1 = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/adaptiveThreshold.png")
 # 画像2
-img2 = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei1.tiff")
+img2 = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/adaptiveThreshold.png")
 
 # A-KAZE検出器の生成
 akaze = cv2.AKAZE_create()
@@ -21,7 +21,7 @@ bf = cv2.BFMatcher() # 総当たりマッチング(Brute-Force Matcher)生成
 matches = bf.knnMatch(des1, des2, k=2)
 
 # データをマッチング精度の高いもののみ抽出
-ratio = 0.5
+ratio = 0.8
 good = []
 for m, n in matches:
     if m.distance < ratio * n.distance:

@@ -41,8 +41,12 @@ img_lapGau = cv2.convertScaleAbs(Laplacian_Gaussian_filter)
 img_canny = cv2.Canny(img,10,110)
 
 if __name__ == "__main__":
-    img = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/clahe2.png")
+    img = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/resultopen.png")
     ##メディアんフィルタ
-    img_blur =cv2.blur(img,(3,3))
-    cv2.imwrite("median2.png",img_blur)
+    ##メディアんフィルタ
+    img_median =cv2.medianBlur(img,5)  
+    # img = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/adaptiveThreshold.png")
+    # ##メディアんフィルタ
+    # img_canny = cv2.Canny(img,360,500)
+    cv2.imwrite("medianbinary.png",img_median)
     

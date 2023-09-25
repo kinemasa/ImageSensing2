@@ -43,7 +43,7 @@ def gammaCurve(frame, gamma = 0.5):
 
 
 if __name__ == "__main__":
-    imgName  = "/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/median.jpg"
+    imgName  = "/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/median.png"
     img = cv2.imread(imgName)
     s = sToneCurve(img)
     cv2.imwrite("s.png",s)

@@ -31,7 +31,7 @@ def Morphologydilate(img):
 
 
 if __name__ == "__main__":
-    imgName  = "/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/adaptiveThreshold.png"
+    imgName  = "/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/adaptiveThreshold1010.png"
     # img_erode = MorphologyErode(imgName)
     # img_dilate=Morphologydilate(imgName)
 
@@ -40,13 +40,12 @@ if __name__ == "__main__":
     
      
     img = cv2.imread(imgName,0)
-
+    img = cv2.bitwise_not(img)
     # カーネルを作成する。
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2, 2))
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
 
     # 2値画像を収縮する。
-    dst = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel, iterations=2)
-    cv2.imshow("result",dst)
+    dst = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel, iterations=1)
+    dst = cv2.bitwise_not(dst)
+    cv2.imwrite("resultopen.png",dst)
 
-    cv2.waitKey(0) 
-    cv2.destroyAllWindows()
