@@ -168,7 +168,7 @@ def main():
     ##dataName
     subject ='gantei'
    ##sample_rate 
-    sample_rate = 60
+    sample_rate = 30
     
 
     ##importData

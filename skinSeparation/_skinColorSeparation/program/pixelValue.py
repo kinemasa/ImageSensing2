@@ -7,23 +7,33 @@ import csv
 import re
 import os
 import _funcSkinSeparation2 as ss
+import re
 
+def atoi(text):
+    return int(text) if text.isdigit() else text
+
+def natural_keys(text):
+    return [ atoi(c) for c in re.split(r'(\d+)', text) ]
+  
 def getVideoROI(img):
     roi = cv2.selectROI(img)
     cv2.destroyAllWindows()
     return roi
 
-dir_name ='/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/studyFlow/result/mask3'
-files = glob.glob(dir_name+'*')
-OUTPUT_DIR='/Users/masayakinefuchi/imageSensing/RGB_pulse/_skinColorSeparation/result/'
-subject ='gantei'
+dir_name ='/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/'
+files = sorted(glob.glob(dir_name +'img_binary.png'), key=natural_keys)
+
+OUTPUT_DIR='/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/skinSeparation/_skinColorSeparation/result/'
+
+subject ='gantei30'
 OUTPUT_FILE =OUTPUT_DIR +subject +'.csv'
 num = len(files)
-
+print(files)
 ##import picture
 img_name = files[0]
+print(img_name)
 img = cv2.imread(img_name)
-img_copy=cv2.imread(img_name)
+
 
 width = int(img.shape[1])
 height = int(img.shape[0])
@@ -41,16 +51,7 @@ selectRoi_crop = img[int(roi[1]):int(roi[1]+roi[3]),int(roi[0]):int(roi[0]+roi[2
 #Crop   Image(selected_ROI)
 # fixedRoi_crop = img[int(y1):int(y1+height),int(x1):int(x1+width)]
 
-# cv2.rectangle(img_copy,
-#               pt1 =(x1,y1),
-#               pt2 =(x1+width,y1+height),
-#               color =(0,255,0),
-#               thickness =1,
-#               lineType =cv2.LINE_4,
-#               shift =0
-#               )
-##output  ROI image
-# cv2.imwrite("selectedRoi.png", selectRoi_crop)
+cv2.imwrite("selectedRoi.png", selectRoi_crop)
 # cv2.imwrite("fixedRoi.png", fixedRoi_crop)
 # cv2.imwrite("output.png",img_copy)
 
@@ -63,20 +64,16 @@ time = np.zeros(int(num))
 
 i = 0
 for f in files:
-
-    basename=os.path.basename(f)
-    root, ext = os.path.splitext(basename)
-    f_sp = re.split('[-_ ]',root)
-
-    #print(f_sp)
-    ##ファイルの名前から時間を取得（icexpressの出力に依存する）
-    time[i] = float(f_sp[3])*3600000+float(f_sp[4])*60000+float(f_sp[5])*1000
-
+    
     img = cv2.imread(f)
+    
     ##平均画素値を色素成分関数に入力して得られたヘモグロビン画像の値で取得
     
     ##ROI
-    pulsewave[i] = np.mean(ss.skinSeparation(img[int(roi[1]):int(roi[1]+roi[3]),int(roi[0]):int(roi[0]+roi[2]),:],"Hemoglobin"))
+    img_roi = img[int(roi[1]):int(roi[1]+roi[3]),int(roi[0]):int(roi[0]+roi[2])]
+    roi_width, roi_height = roi[2],roi[3]
+    img_roi = np
+    pulsewave[i] = np.sum(img[int(roi[1]):int(roi[1]+roi[3]),int(roi[0]):int(roi[0]+roi[2]),:])
     
     #fixedSIze
     #pulsewave[i] = np.mean(ss.skinSeparation(img[int(roi[1]):int(roi[1]+height),int(roi[0]):int(roi[0]+width),:],"Hemoglobin"))

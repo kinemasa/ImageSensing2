@@ -7,15 +7,7 @@ import numpy as np
 import glob
 import os
 import sys
-import re
 
-
-def atoi(text):
-    return int(text) if text.isdigit() else text
-
-def natural_keys(text):
-    return [ atoi(c) for c in re.split(r'(\d+)', text) ]
-  
 def getVideoROI(img):
     roi = cv2.selectROI(img)
     cv2.destroyAllWindows()
@@ -84,13 +76,14 @@ def adaptiveBinary(img,filtersize=101,substract_num=10):
     cv2.THRESH_BINARY, filtersize, substract_num)
   return dst2
 
-def molphologyClosing(img):
+def molphologyOpning(img):
   img = cv2.bitwise_not(img)
   kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
-  dst = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel, iterations=1)
+  dst = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel, iterations=1)
   dst = cv2.bitwise_not(dst)
   # cv2.imwrite("resultopen.png",dst)
   return dst
+
 def mask(img,mask):
   mask = cv2.bitwise_not(mask)
   maskedImage = cv2.bitwise_and(img,mask)
@@ -100,63 +93,33 @@ def mask(img,mask):
   # cv2.imwrite("mask.png",maskedImage)
   # cv2.imwrite("adjastMask.png",subtracted_image)
   return maskedImage
-
-# #大津の二値化とあだによる二値化
-def binary_otsu(img):
-    ret2,img_otsu =cv2.threshold(img,0,255,cv2.THRESH_OTSU)
-    img_ada=cv2.adaptiveThreshold(img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,3,1)
-    return img_otsu
-  
+    
 if __name__ == "__main__":
   
-  """
-  Input :眼底画像群
-  """
-  INPUT_DIR = '/Volumes/Extreme SSD/gantei1009/'
-  files = sorted(glob.glob(INPUT_DIR +'*'), key=natural_keys)
+  INPUT_DIR = '/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/studyFlow/result/templateImage/'
+  files = glob.glob(INPUT_DIR+'*')
+  basic_mask =cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/studyFlow/result/mask3/0.jpg",0)
   
-  
-  OUTPUT_TEMPLATE= '/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/studyFlow/result/templateImage/'
-  OUTPUT_ADAPTIVE= '/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/studyFlow/result/adaptiveImage/'
-  OUTPUT_BINARY= '/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/studyFlow/result/binaryImage/'
-  OUTPUT_MASKED= '/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/studyFlow/result/maskedImage/'
-  
-  # ##テンプレート作成
-  img = files[0]
-  img = cv2.imread(img)
-  temp = getTemplate(img)
-  
-  # # ##テンプレートマッチング
-  TemplateMatching(files,temp,OUTPUT_TEMPLATE)
-  templatefiles = sorted(glob.glob(OUTPUT_TEMPLATE +'*'), key=natural_keys)
-  
-  # 閾値の設定
-  threshold = 50
-  
+  OUTPUT_MASK4= '/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/studyFlow/result/mask4/'
+  templatefiles = glob.glob(INPUT_DIR+'*')
   i =0
   for template in templatefiles:
 
     num = len(templatefiles)
-    
     img = cv2.imread(template)
     img_median = Median(img,3)
     img_storn =sToneCurve(img_median)
     img_clahe =Chale(img_storn,clipLimit=3.0,theGridSize=(8,8))
-    img_adaptive = adaptiveBinary(img_clahe)
-    img_close  =molphologyClosing(img_adaptive)
-    img_adaptive_median = Median(img_close,3)
-    # 二値化(閾値100を超えた画素を255にする。)
-    ret, img_binary = cv2.threshold(img_adaptive_median, threshold, 255, cv2.THRESH_BINARY)
+    img_binary = adaptiveBinary(img_clahe)
+    img_open  =molphologyOpning(img_binary)
+    img_binary_median = Median(img_open,3)
     
-    img_mask =mask(img_clahe,img_adaptive_median)
+    img_mask =mask(img_clahe,basic_mask)
     
-    adaptivefile = OUTPUT_ADAPTIVE+ str(i) +".jpg"
-    binaryfile = OUTPUT_BINARY + str(i) +".jpg"
-    maskfile = OUTPUT_MASKED + str(i) +".jpg"
+    mask_dir =OUTPUT_MASK4+ str(i) +".jpg"
+  
+    cv2.imwrite(mask_dir,img_mask)
     
-    cv2.imwrite(adaptivefile,img_adaptive)
-    cv2.imwrite(binaryfile,img_binary)
-    cv2.imwrite(maskfile,img_mask)
     i += 1
     sys.stdout.flush()
     sys.stdout.write('\rProcessing... (%d/%d)' %(i,num))
