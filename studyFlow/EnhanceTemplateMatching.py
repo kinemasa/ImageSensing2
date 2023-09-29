@@ -91,14 +91,14 @@ def molphologyClosing(img):
   dst = cv2.bitwise_not(dst)
   # cv2.imwrite("resultopen.png",dst)
   return dst
+
+
 def mask(img,mask):
   mask = cv2.bitwise_not(mask)
   maskedImage = cv2.bitwise_and(img,mask)
-  ##減算処理を行う
-  M = np.ones(img.shape, dtype="uint8") * 50
-  subtracted_image = cv2.subtract(maskedImage, M)
-  # cv2.imwrite("mask.png",maskedImage)
-  # cv2.imwrite("adjastMask.png",subtracted_image)
+  # ##減算処理を行う
+  # M = np.ones(img.shape, dtype="uint8") * 50
+  # subtracted_image = cv2.subtract(maskedImage, M)
   return maskedImage
 
 # #大津の二値化とあだによる二値化
@@ -120,6 +120,7 @@ if __name__ == "__main__":
   OUTPUT_ADAPTIVE= '/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/studyFlow/result/adaptiveImage/'
   OUTPUT_BINARY= '/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/studyFlow/result/binaryImage/'
   OUTPUT_MASKED= '/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/studyFlow/result/maskedImage/'
+  OUTPUT_BINSRY_TEMPLATE ='/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/studyFlow/result/binaryTemplateImage/'
   
   # ##テンプレート作成
   img = files[0]
@@ -131,7 +132,7 @@ if __name__ == "__main__":
   templatefiles = sorted(glob.glob(OUTPUT_TEMPLATE +'*'), key=natural_keys)
   
   # 閾値の設定
-  threshold = 50
+  threshold = 10
   
   i =0
   for template in templatefiles:
@@ -163,6 +164,22 @@ if __name__ == "__main__":
 
   i = 0
   
+  
+  
+  INPUT_BINARY_DIR = OUTPUT_BINARY
+  binaryFiles = sorted(glob.glob(INPUT_BINARY_DIR +'*'), key=natural_keys)
+  
+  
+   # ##テンプレート作成
+  binaryImg = binaryFiles[0]
+  binaryImg = cv2.imread(binaryImg)
+  binaryTemp = getTemplate(binaryImg)
+  
+  # # ##テンプレートマッチング
+  TemplateMatching(binaryFiles,binaryTemp,OUTPUT_BINSRY_TEMPLATE)
+  
+
+ 
   
   
   
