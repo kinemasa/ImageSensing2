@@ -35,17 +35,20 @@ def morph_reconstruct_filter(grChannel,vesselSize):
 
 
 ##カーネルとの畳み込み処理を行う
-def convolve2D(image,kernel):
+def convolve2D(image,filter):
     (iH, iW) = image.shape
-    (kH, kW) = kernel.shape
-    pad = (kW - 1) // 2
-    img = cv2.copyMakeBorder(image, pad, pad, pad, pad, cv2.BORDER_REPLICATE)
+    (kH, kW) = filter.shape
+    
+    padding = (kW - 1) // 2
+    img = cv2.copyMakeBorder(image, padding, padding, padding, padding, cv2.BORDER_REPLICATE)
+    
     w = np.zeros((iH,iW), dtype = "float32")
     output = np.zeros((iH, iW), dtype = "float32")
-    for y in np.arange(pad, iH + pad):
-        for x in np.arange(pad, iW + pad):
-            roi = img[y - pad:y + pad + 1, x - pad:x + pad + 1]
-            output[y - pad,x - pad] = (roi * kernel).sum()
+    
+    for y in np.arange(padding, iH + padding):
+        for x in np.arange(padding, iW + padding):
+            roi = img[y - padding:y + padding + 1, x - padding:x + padding + 1]
+            output[y - padding,x - padding] = (roi * filter).sum()
     
     w = image - output
 
@@ -61,7 +64,9 @@ def isotropic_undec_wavelet_filter2D(image):
     C1 = 1. / 16.
     C2 = 4. / 16.
     C3 = 6. / 16.
+    
     W = []
+    C = []
     kernel_sizes = [5,9,17]
     for idx, ks in enumerate(kernel_sizes):
         ks = ks//2
@@ -76,27 +81,30 @@ def isotropic_undec_wavelet_filter2D(image):
         c_nxt, w = convolve2D(c_prv, kernel.T * kernel)
         c_prv = c_nxt
         W.append(w)
+        C.append(c_prv)
         A = kernel.T * kernel
 
 
     
     #     Computing the result Iiuw
-    Iiuw = W[1] + W[2]
-    #Iiuw= W[0]
-    plt.imsave("wavelet.png",Iiuw)
-    return Iiuw, c_nxt, W
+    #Iiuw = W[1] + W[2]
+    Iiuw= W[1] + W[2]
+    plt.gray()
+    plt.imsave("wavelet-w012.png",Iiuw)
+    return Iiuw, C, W
 
 
 if __name__ =="__main__":
     
     ##Mac
-    img ="/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/clahe2.png"
+    img ="/Users/masayakinefuchi/labo/otu.png"
     
     grChannel= egc.extract_green_channel(img)
     
-    morphChannel= morph_reconstruct_filter(grChannel,10)
-    filtered_result, _, _ = isotropic_undec_wavelet_filter2D(grChannel)
-    
-    plt.imsave("morph.png",morphChannel)
-    plt.imsave("wavelet.png",filtered_result)
+    # morphChannel= morph_reconstruct_filter(grChannel,10)
+    filtered_result, c, _ = isotropic_undec_wavelet_filter2D(grChannel)
+    plt.gray()
+    # plt.imsave("morph.png",morphChannel)
+    plt.imsave("wavelet.png",filtered_result) 
+    plt.imsave("c.png",c[2]) 
    

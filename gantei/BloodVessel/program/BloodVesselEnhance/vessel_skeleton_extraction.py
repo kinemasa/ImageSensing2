@@ -45,7 +45,7 @@ def vessel_skeleton_extraction(image):
 
 
 if __name__ =="__main__":
-    img ="/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/triming.jpg"
+    img ="/Users/masayakinefuchi/labo/clahe8.png"
     grChannel= egc.extract_green_channel(img)
     vessel =vessel_skeleton_extraction(grChannel)
 
