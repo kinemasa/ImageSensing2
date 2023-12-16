@@ -18,7 +18,7 @@ def getVideoROI(img):
     cv2.destroyAllWindows()
     return roi
 
-dir_name = '/Volumes/Extreme SSD/gantei1009/'
+dir_name = '/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei/BloodVessel/result/lowfuried/'
 
 files = glob.glob(dir_name+'*')
 
@@ -40,7 +40,7 @@ selectRoi_crop = img[int(roi[1]):int(roi[1]+roi[3]),int(roi[0]):int(roi[0]+roi[2
 cv2.rectangle(img,(roi[0],roi[1]),(roi[0]+roi[2],roi[1]+roi[3]),(0,0,200),3)
 
 
-cv2.imwrite("template.png", selectRoi_crop)
+cv2.imwrite("template1.png", selectRoi_crop)
 
 cv2.imwrite("checkROI.png", img)
 

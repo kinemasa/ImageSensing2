@@ -13,10 +13,10 @@ import os
 
 
   
-INPUT_DIR = '/Volumes/Extreme SSD/gantei1009/'
+INPUT_DIR = '/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei/BloodVessel/result/lowfuried/'
 files = glob.glob(INPUT_DIR+'*')
-OUTPUT_DIR= '/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei/BloodVessel/result/triming/'
-temp = cv2.imread("/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/template.png")
+OUTPUT_DIR= '/Users/masayakinefuchi/labo/imagesensing2/ImageSensing2/gantei/BloodVessel/result/triming2/'
+temp = cv2.imread("/Users/masayakinefuchi/labo/template1.png")
 num = len(files)
 
 ##import picture
@@ -44,7 +44,7 @@ for f in files:
     pt = max_pt
 
     selectRoi_crop = img[int(pt[1]):int(pt[1]+temp_height),int(pt[0]):int(pt[0]+temp_width)]
-    output_file = OUTPUT_DIR + str(i) +".jpg"
+    output_file = OUTPUT_DIR + str(i) +".png"
     cv2.imwrite(output_file,selectRoi_crop)
     i += 1
 
